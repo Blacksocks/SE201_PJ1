@@ -12,8 +12,13 @@ uint64_t multiplication(uint32_t a, uint32_t b)
 {
     uint64_t c = 0;
     for(int i = 0; i < 32; i++) // go throught each bit of B
-        if(b >> i & 0x0001 == 0x0001) // check if the i-th bit is equal to 1
+    {
+        if(b & 0x0001 == 0x0001) // check if the i-th bit is equal to 1
             c += a << i; // add A*2^i to C
+	b = b >> 1;
+	if(b == 0x0000)
+	    return c;
+    }
     return c;
 }
 
