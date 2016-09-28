@@ -56,8 +56,10 @@ void half_adder(char a, char b, char *s, char *c)
 // carry (c)
 void full_adder(char a, char b, char c_in, char *s, char *c)
 {
-    half_adder(a, b, s, c);
+    char c_tmp;
+    half_adder(a, b, s, &c_tmp);
     half_adder(*s, c_in, s, c);
+    *c = or(*c, c_tmp);
 }
 
 // perform an addition of two unsigned N-bit binary numbers, represented as
@@ -68,9 +70,12 @@ void addition(char *a, char *b, char *s)
   char c_in;
   char c_out;
 
-  half_adder(*(a+N-1), *(b+N-1), s+N-1, &c_in);
-  for(i = N - 2; i > 0 ; i--)
+  half_adder(*(a+N-1), *(b+N-1), s+N-1, &c_out);
+  for(i = N - 2; i >= 0 ; i--)
+  {
+    c_in = c_out;
     full_adder(a[i], b[i], c_in, &s[i], &c_out);
+  }
 }
 
 // perform an addition of two signed N-bit binary numbers, represented as
@@ -81,26 +86,25 @@ void addition_signed(char *a, char *b, char *s)
   // But you can see that if two numbers with the same sign (either positive
   // or negative) are added and the result has the opposite sign, an overflow
   // has occurred.
-  if(is_binary(a) == is_binary(b) && is_binary(a) != is_binary(s))
+  if(*a == *b && *a != *s)
   {
-    fprintf(stderr, "stack overflow at : %d\n", s);
+    fprintf(stderr, "stack overflow at : %p\n", s);
     exit(2);
   }
-
 }
 
 // perform a one's complement.
 void ones_complement(char *a)
 {
     for(int i = 0; i < N; i++)
-        *(a+i) = xor(a, '0');
+        *(a+i) = xor(*(a+i), '1');
 }
 
 // perform a subtraction of two N-bit binary numbers A and B, represented as
 // strings: S = A - B - 1
 void subtraction_minus_one(char *a, char *b, char *s)
 {
-    ones_complenment(b); // use complement allows to get -B-1
+    ones_complement(b); // use complement allows to get -B-1
     addition(a, b, s);
 }
 
@@ -159,17 +163,23 @@ int main(int argc, char **argv)
   char c[N + 1];
   memset(c, '0', N); c[N] = '\0';
 
+  printf("a:   %s\n", a);
+  printf("b:   %s\n", b);
+
   // perform the addition
   addition(a, b, c);
-
-  // TODO: call addition_signed and subtraction_minus_one
-
   // print result
-  printf("a:   %s\n", a);
-  printf("b: + %s\n", b);
   printf("c:   %s\n", c);
 
-  // TODO: print results of addition_signed and subtraction_minus_one
+  // perform the addition_signed
+  addition_signed(a, b, c);
+  // print result
+  printf("c:   %s\n", c);
+
+  // perform the subtraction_minus_one
+  subtraction_minus_one(a, b, c);
+  // print result
+  printf("c:   %s\n", c);
 
   return 0;
 }
