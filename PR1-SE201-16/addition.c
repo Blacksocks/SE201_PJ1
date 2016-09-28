@@ -83,16 +83,25 @@ void addition_signed(char *a, char *b, char *s)
   // has occurred.
   if(is_binary(a) == is_binary(b) && is_binary(a) != is_binary(s))
   {
-    fprintf(stderr, "Stack overflow at : %d\n", s);
+    fprintf(stderr, "stack overflow at : %d\n", s);
     exit(2);
   }
+
+}
+
+// perform a one's complement.
+void ones_complement(char *a)
+{
+    for(int i = 0; i < N; i++)
+        *(a+i) = xor(a, '0');
 }
 
 // perform a subtraction of two N-bit binary numbers A and B, represented as
 // strings: S = A - B - 1
 void subtraction_minus_one(char *a, char *b, char *s)
 {
-
+    ones_complenment(b); // use complement allows to get -B-1
+    addition(a, b, s);
 }
 
 // convert an input binary number represented as string to a fixed-width binary
