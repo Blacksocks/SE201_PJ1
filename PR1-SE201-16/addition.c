@@ -77,7 +77,15 @@ void addition(char *a, char *b, char *s)
 // strings, and perform an overflow check.
 void addition_signed(char *a, char *b, char *s)
 {
-  // TODO: implement
+  addition(a, b, s);
+  // But you can see that if two numbers with the same sign (either positive
+  // or negative) are added and the result has the opposite sign, an overflow
+  // has occurred.
+  if(is_binary(a) == is_binary(b) && is_binary(a) != is_binary(s))
+  {
+    fprintf(stderr, "Stack overflow at : %d\n", s);
+    exit(2);
+  }
 }
 
 // perform a subtraction of two N-bit binary numbers A and B, represented as
