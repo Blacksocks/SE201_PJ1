@@ -163,23 +163,23 @@ int main(int argc, char **argv)
   char c[N + 1];
   memset(c, '0', N); c[N] = '\0';
 
-  printf("a:   %s\n", a);
-  printf("b:   %s\n", b);
+  printf("a: %s\n", a);
+  printf("b: %s\n", b);
 
   // perform the addition
   addition(a, b, c);
   // print result
-  printf("c:   %s\n", c);
+  printf("c: %s [addition]\n", c);
 
   // perform the addition_signed
   addition_signed(a, b, c);
   // print result
-  printf("c:   %s\n", c);
+  printf("c: %s [addition_signed]\n", c);
 
   // perform the subtraction_minus_one
   subtraction_minus_one(a, b, c);
   // print result
-  printf("c:   %s\n", c);
+  printf("c: %s [subtraction_minus_one]\n", c);
 
   return 0;
 }
