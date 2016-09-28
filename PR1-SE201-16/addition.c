@@ -56,7 +56,8 @@ void half_adder(char a, char b, char *s, char *c)
 // carry (c)
 void full_adder(char a, char b, char c_in, char *s, char *c)
 {
-  // TODO: implement
+    half_adder(a, b, &s, &c);
+    half_adder(s, c_in, &s, &c);
 }
 
 // perform an addition of two unsigned N-bit binary numbers, represented as
