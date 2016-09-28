@@ -48,10 +48,8 @@ char xor(char a, char b)
 // add two binary numbers, returning the sum (s) and carry (c)
 void half_adder(char a, char b, char *s, char *c)
 {
-  // TODO: implement
-	s = 
-	c = 
-		
+	s = xor(a, b);
+	c = and(a, b);	
 }
 
 // add two binary numbers and an input carry, returning the sum (s) and
