@@ -49,9 +49,9 @@ char xor(char a, char b)
 void half_adder(char a, char b, char *s, char *c)
 {
   // TODO: implement
-	s = 
-	c = 
-		
+	s =
+	c =
+
 }
 
 // add two binary numbers and an input carry, returning the sum (s) and
@@ -66,6 +66,16 @@ void full_adder(char a, char b, char c_in, char *s, char *c)
 void addition(char *a, char *b, char *s)
 {
   // TODO: implement
+  int i;
+  char* cin;
+  char* cout;
+
+  half_adder(a[0], b[0], s, cin);
+
+  for(i=1; a[i]=='0' && b[i]=='0'; i++)
+  {
+    full_adder(a[i], b[i], cin, s+i, cout);
+  }
 }
 
 // perform an addition of two signed N-bit binary numbers, represented as
