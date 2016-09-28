@@ -48,8 +48,8 @@ char xor(char a, char b)
 // add two binary numbers, returning the sum (s) and carry (c)
 void half_adder(char a, char b, char *s, char *c)
 {
-	s = xor(a, b);
-	c = and(a, b);
+	*s = xor(a, b);
+	*c = and(a, b);
 }
 
 // add two binary numbers and an input carry, returning the sum (s) and
@@ -57,24 +57,20 @@ void half_adder(char a, char b, char *s, char *c)
 void full_adder(char a, char b, char c_in, char *s, char *c)
 {
     half_adder(a, b, s, c);
-    half_adder(s, c_in, s, c);
+    half_adder(*s, c_in, s, c);
 }
 
 // perform an addition of two unsigned N-bit binary numbers, represented as
 // strings
 void addition(char *a, char *b, char *s)
 {
-  // TODO: implement
   int i;
-  char* cin;
-  char* cout;
+  char c_in;
+  char c_out;
 
-  half_adder(a[0], b[0], s, cin);
-
-  for(i=1; a[i]=='0' && b[i]=='0'; i++)
-  {
-    full_adder(a[i], b[i], cin, s+i, cout);
-  }
+  half_adder(*(a+N-1), *(b+N-1), s+N-1, &c_in);
+  for(i = N - 2; i > 0 ; i--)
+    full_adder(a[i], b[i], c_in, &s[i], &c_out);
 }
 
 // perform an addition of two signed N-bit binary numbers, represented as
