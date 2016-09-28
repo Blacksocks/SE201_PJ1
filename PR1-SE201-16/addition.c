@@ -49,16 +49,17 @@ char xor(char a, char b)
 void half_adder(char a, char b, char *s, char *c)
 {
   // TODO: implement
-	s = 
-	c = 
-		
+	s =
+	c =
+
 }
 
 // add two binary numbers and an input carry, returning the sum (s) and
 // carry (c)
 void full_adder(char a, char b, char c_in, char *s, char *c)
 {
-  // TODO: implement
+    half_adder(a, b, &s, &c);
+    half_adder(s, c_in, &s, &c);
 }
 
 // perform an addition of two unsigned N-bit binary numbers, represented as
