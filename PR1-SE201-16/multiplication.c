@@ -15,9 +15,9 @@ uint64_t multiplication(uint32_t a, uint32_t b)
     {
         if(b & 0x0001 == 0x0001) // check if the i-th bit is equal to 1
             c += a << i; // add A*2^i to C
-	b = b >> 1;
-	if(b == 0x0000)
-	    return c;
+    	b = b >> 1; // shift in order to go throught each bit of B
+    	if(b == 0x0000) // don't handle zeros at the beginning of B
+    	    return c;
     }
     return c;
 }
