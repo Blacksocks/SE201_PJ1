@@ -39,10 +39,10 @@ Arithmetics
     xor       101
 
 Write
-  wr addr val
+  wr addr0 val
   11 ---  --- ---- ----
 
-  addr : writing address
+  addr0 : writing address
   val : immediate signed value
 
 Load & Store
@@ -56,11 +56,11 @@ Load & Store
     store   1
 
 Condition
-  cond imm        addr0 addr1
+  cond imm        addr1 addr2
   10   ---- ----  ---   ---
 
   imm : offset from PC
-  addr0, addr1 : comparison element
+  addr1, addr2 : comparison element
 
 2.1.2
 
@@ -80,3 +80,21 @@ mult addr1 addr0 addr0
 mult addr1 addr0 addr1
 
 2097152 is stored at addr1
+
+2.1.4
+
+wr reg1 0x200           //int *a = 0x200;
+wr reg2 0               //int s = 0;
+wr reg3 0               //int i = 0;
+wr reg4 10              //int equal10 = 10;
+wr reg6 4               //int equalSizeOfInt = 4;
+wr reg7 1               //int inc = 1;
+load reg5 reg1          //*a
+add reg2 reg2 reg5      //s = s + *a;
+add reg1 reg1 reg6      //a++;
+add reg3 reg3 reg7      //i++;
+cond -10 reg3 reg4       //if(i != 10) (PC = PC + 2 - 10, PC est systématiquement incrémenté de 2 et nous aimerions revenir de 4 instructions en arrière (8 octets))
+
+2.2
+
+al  lza
