@@ -5,11 +5,11 @@
 ##1.4 - Multiplication and Overflow
 
 ###1.4.1
-a = 10110 (= 22)
-b = 00110 (=6)
-00110 : Is the last bit of b equal to 1? No
+a = 10110 (= 22)  
+b = 00110 (=6) 
+00110 : Is the last bit of b equal to 1? No  
 00110 >> 1 = 00011 : Is the last bit of b equal to 1? Yes →  c = a << 1 = 101100
-00011 >> 1 = 00001 : Is the last bit of b equal to 1? Yes →  c = c + a << 2 = 101100 + 1011000 = 10000100
+00011 >> 1 = 00001 : Is the last bit of b equal to 1? Yes →  c = c + a << 2 = 101100 + 1011000 = 10000100  
 00001 >> 1 = 00000 : Is the last bit of b equal to 1? No. Is b equal to 0? Yes → Finished c = 10000100 (=132)
 
 ###1.4.2
