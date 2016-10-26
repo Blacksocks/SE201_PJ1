@@ -22,6 +22,13 @@ cfg/*.cfg: bin/bsort.elf
 %.log: cfg/%.cfg bin/bsort.bin
 	$(OPENDLX) -c cfg/$*.cfg
 
+pdf: comp_pdf show_pdf clean_pdf
+comp_pdf:
+	pdflatex compte_rendu.tex
+show_pdf:
+	evince compte_rendu.pdf
+clean_pdf:
+	rm -f *.aux *.log
 
 clean:
 	rm -f bin/bsort.elf bin/bsort.bin *.log
