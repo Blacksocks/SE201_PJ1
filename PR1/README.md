@@ -14,13 +14,51 @@ b = 00110 (=6)
 00001 >> 1 = 00000 : Is the last bit of b equal to 1? No. Is b equal to 0? Yes → Finished c = 10000100 (=132)
 ```
 ### 1.4.2
+Pour éviter l'overflow sur des nombres de 5 bits signés.  
+__Idée 1__
+On peut regarder la position du bit de poids fort non nul de chaque nombre  
+(sans prendre en compte le bit de signe).
+Si la somme des positions des bits de poids fort est strictement supérieure à 5, alors il y a overflow.  
+Malheureusement, la réciproque n'est pas vrai.  
 
+__Ex:__
+a = 01000  
+b = 00010  
+Position du bit de poids fort de a : 4  
+Position du bit de poids fort de b : 2  
+Somme des positions : 6  
+Donc c = a*b = 10000 -> overflow  
+
+__Contre-exemple :__
+a = 00111  
+b = 00011  
+Position du bit de poids fort de a : 3  
+Position du bit de poids fort de b : 2  
+Somme des positions : 5  
+Or, c = a*b = 10101 -> overflow  
+
+__Idée 2__
+Si les bits de poids fort non nul ne sont pas précédés d'un 1, alors il n'y pas de retenue qui provoque l'overflow  
+
+__Ex1 :__
+a = 00101  
+b = 00010  
+c = 01010 -> pas d'overflow  
+
+__Ex2 :__
+a = 00110  
+b = 00011  
+c = 11010 -> overflow  
+
+__Conclusion__
+Si la somme des positions des bits de poids fort non nul est strictement supérieure à 5 -> overflow  
+Si la somme est égale à 5 et qu'ils sont précédés d'un 1 -> overflow  
+Sinon -> pas d'overflow  
 
 ### 1.4.3
 a = 00111 (=7)  
 b = 00101 (=5)  
 00101 : last bit of b is equal to 1? Yes  
-
 
 # 2 - Processor Design
 ### 2.1.1 - Instruction Set Architecture
