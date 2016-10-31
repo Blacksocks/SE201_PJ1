@@ -17,7 +17,7 @@ b = 00110 (=6)
 
 
 ### 1.4.3
-a = 00111 (= 7)  
+a = 00111 (=7)  
 b = 00101 (=5)  
 00101 : last bit of b is equal to 1? Yes  
 
@@ -125,8 +125,8 @@ cond -10   reg3 reg4  //if(i != 10) (PC = PC + 2 - 10, PC est systématiquement 
 __Data hazard__ :  
 When does it occur?  
 If we want to change the value of a register and the next step needs this new value which is not available in the register, the data hazard occurs.  
-Examples : Arithmetic operation + store the result --> Data hazard  
-	(Arithmetic, write, load) + (arithmetic, store, condition)  
+*Arithmetic/write/load* then *arithmetic/store/condition*  --> Data hazard  
+Examples : *Arithmetic* operation then *store* the result --> Data hazard  
 How to resolve? We should stall during one clock period. The stall unit gets the values of Addr0, Addr1, Addr2, RegWrEn so as to know when to disable the PC and the IF/ID register.  
 
 __Control hazard__ :  
