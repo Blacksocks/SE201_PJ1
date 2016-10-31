@@ -17,13 +17,28 @@
 	\date{October 7, 2016}
 	\maketitle
 
-	\Large{\textbf{1 - Setup}}\\\break
+	\Large{\textbf{3 - Pipelining}}\\\break
     \small
-    \underline{1.1}\\
+    \underline{3.1}\\
     \setlength{\parindent}{5ex}\par
-	repone 1\\\break
-    \underline{1.2}\\
+	En observant les instructions, on remarque un data hazard lors de l'execution de l'instruction 3.
+	En effet, le store (instrution 3) nécessite la valeur du registre 29, mais celle-ci n'est pas encore à jour.
+	L'instruction précédent qui écrit dans ce registre n'est pas encore terminée.\\
+	Au cycle 17, la valeur de r29 n'est pas à jour mais elle devrait être chargée par le store qui est en ID.
+	Au cycle 18, l'instruction 3 passe directement à l'execution sans avoir attentdu de pouvoir lire la valeur du registre 29.
+	Il y a donc bien forwarding.
+	((((((((((-------->  INCLUDE 1.PNG  <---------))))))))))))
+	\\\break
+    \underline{3.2}\\
     \par
-    reponse 2\\\break
+	Première exemple : \\
+	((((((((((-------->  INCLUDE 2.PNG  <---------))))))))))))
+	Dans le cas d'un jump (jr) ou d'une condition (beqz, bnez) à cause une "misprediction" le processeur va "flush" les instructions qui avaient été commencé. 
+	Celles-ci ne se finiront jamais.  
+	Second exemple : \\
+	((((((((((-------->  INCLUDE 3.PNG  <---------))))))))))))
+	\\\break
+\underline{3.3}\\
+    \par
 
 \end{document}
