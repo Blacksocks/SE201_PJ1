@@ -1,4 +1,4 @@
-
+﻿
 
 # 1 - Two’s Complement Arithmetic
 
@@ -99,6 +99,42 @@ add reg3 reg3 reg7      //i++;
 cond -10 reg3 reg4       //if(i != 10) (PC = PC + 2 - 10, PC est systématiquement incrémenté de 2 et nous aimerions revenir de 4 instructions en arrière (8 octets))
 ```
 
-## 2.2
+## 2.2  
+### 2.2.1  
+Data hazard :  
+When does it occur?  
+If we want to change the value of a register and the next step needs this new value which is not available in the register, the data hazard occurs.  
+Examples : Arithmetic operation + store the result --> Data hazard
+	(Arithmetic, write, load) + (arithmetic, store, condition)
+How to resolve? We should stall during one clock period. The stall unit gets the values of Addr0, Addr1, Addr2, RegWrEn so as to know when to disable the PC and the IF/ID register.  
+ 	
+Control hazard :  
+When does it occur?  
+When a condition branch is taken the value of the PC is false during two clock periods. 
+How to resolve? We should flush two instructions. The flush unit gets the value of the &-comparator in order to set RegWrEn and MemWrEn to zero when it's needed. 
+It is needed when Branch = 1 (meaning the instruction is a comparaison) and the value of the conparaison = 1 (output of the ALU), in one word when the branch is taken.
 
-al  lza
+Structural hazard :  
+When does it occur?  
+It can happen when an arithmetical instruction or a conditional instruction need to access the two same addresses.  
+How to resolve?
+The compilator must handle this issue by using temporary registers.
+
+### 2.2.2  
+Our processors do not need the forwarding because the stalling already take care of data hazards.
+The processor would have been faster with the forwarding, winning one clock period everytime a data hazard occurs. 
+
+### 2.2.3  
+
+| 0x100 | load reg5 reg1     | IF | ID | EX | MEM |    |     |     |     |    |     |    |    |     |    |     |     |     |    |     |   |
+| 0x102 | add reg2 reg2 reg5 |    | IF | ID | ID  | EX | MEM |     |     |    |     |    |    |     |    |     |     |     |    |     | '''html <span style="color:#FF0000;">+1</span> '''|
+| 0x104 | add reg1 reg1 reg6 |    |    | IF | IF  | ID | EX  | MEM |     |    |     |    |    |     |    |     |     |     |    |     |   |
+| 0x106 | add reg3 reg3 reg7 |    |    |    |     | IF | ID  | EX  | MEM |    |     |    |    |     |    |     |     |     |    |     |   |
+| 0x108 | cond -10 reg3 reg4 |    |    |    |     |    | IF  | ID  | ID  | EX | MEM |    |    |     |    |     |     |     |    |     | +1|
+| 0x10A |                    |    |    |    |     |    |     | IF  | IF  | ID | xx  | xx |    |     |    |     |     |     |    |     | +1|
+| 0x10C |                    |    |    |    |     |    |     |     |     | IF | xx  | xx | xx |     |    |     |     |     |    |     |   |
+| 0x100 | load reg5 reg1     |    |    |    |     |    |     |     |     |    | IF  | ID | EX | MEM |    |     |     |     |    |     |   |
+| 0x102 | add reg2 reg2 reg5 |    |    |    |     |    |     |     |     |    |     | IF | ID | ID  | EX | MEM |     |     |    |     |   |
+| 0x104 | add reg1 reg1 reg6 |    |    |    |     |    |     |     |     |    |     |    | IF | IF  | ID | EX  | MEM |     |    |     |   |
+| 0x106 | add reg3 reg3 reg7 |    |    |    |     |    |     |     |     |    |     |    |    |     | IF | ID  | EX  | MEM |    |     |   |
+| 0x108 | cond -10 reg3 reg4 |    |    |    |     |    |     |     |     |    |     |    |    |     |    | IF  | ID  | ID  | EX | MEM | +1|
