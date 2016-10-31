@@ -83,6 +83,8 @@ Load & Store is R format (IIIX XXXX XXXX XXXX, III = instruction)
 ```
 
 ### 2.1.3
+
+This sequence of instruction enable to load 2097152 into a register  
 ```
 wr   addr0 128  
 mult addr1 addr0 addr0  
@@ -91,6 +93,18 @@ mult addr1 addr0 addr1
 2097152 is stored at addr1  
 
 ### 2.1.4
+
+```c
+int *a = 0x200;
+int s = 0;
+for(int i = 0; i != 10; i++)
+{
+	s = s + *a;
+	a++;
+}
+```
+
+This is the translation of the previous c code:  
 
 ```c
 wr   reg1  0x200      //int *a = 0x200;
