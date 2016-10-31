@@ -128,11 +128,17 @@ The processor would have been faster with the forwarding, winning one clock peri
 
 | 0x100 | load reg5 reg1     | IF | ID | EX | MEM |    |     |     |     |    |     |    |    |     |    |     |     |     |    |     |   |
 |-------|--------------------|----|----|----|-----|----|-----|-----|-----|----|-----|----|----|-----|----|-----|-----|-----|----|-----|---|
-| 0x102 | add reg2 reg2 reg5 |    | IF | ID | ID  | EX | MEM |     |     |    |     |    |    |     |    |     |     |     |    |     | ```html <span style="color:#FF0000;">+1</span> ```|
+| 0x102 | add_reg2_reg2_reg5 |    | IF | ID | ID  | EX | MEM |     |     |    |     |    |    |     |    |     |     |     |    |     |
+```html
+<span style="color:#FF0000;">+1</span>
+```|
 | 0x104 | add reg1 reg1 reg6 |    |    | IF | IF  | ID | EX  | MEM |     |    |     |    |    |     |    |     |     |     |    |     |   |
 | 0x106 | add reg3 reg3 reg7 |    |    |    |     | IF | ID  | EX  | MEM |    |     |    |    |     |    |     |     |     |    |     |   |
-| 0x108 | cond -10 reg3 reg4 |    |    |    |     |    | IF  | ID  | ID  | EX | MEM |    |    |     |    |     |     |     |    |     | ```html <span style="color:#FF0000;">+1</span> ```|
-| 0x10A |                    |    |    |    |     |    |     | IF  | IF  | ID | xx  | xx |    |     |    |     |     |     |    |     | ```html <span style="color:#0000FF;">+1</span> ```|
+| 0x108 | cond -10 reg3 reg4 |    |    |    |     |    | IF  | ID  | ID  | EX | MEM |    |    |     |    |     |     |     |    |     |
+```html
+<span style="color:#FF0000;">+1</span> ```|
+| 0x10A |                    |    |    |    |     |    |     | IF  | IF  | ID | xx  | xx |    |     |    |     |     |     |    |     | ```html <span style="color:#0000FF;">+1</span>
+```|
 | 0x10C |                    |    |    |    |     |    |     |     |     | IF | xx  | xx | xx |     |    |     |     |     |    |     | ```html <span style="color:#0000FF;">+1</span> ```|
 | 0x100 | load reg5 reg1     |    |    |    |     |    |     |     |     |    | IF  | ID | EX | MEM |    |     |     |     |    |     |   |
 | 0x102 | add reg2 reg2 reg5 |    |    |    |     |    |     |     |     |    |     | IF | ID | ID  | EX | MEM |     |     |    |     | ```html <span style="color:#FF0000;">+1</span> ```|
