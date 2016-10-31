@@ -126,11 +126,10 @@ __Data hazard__ :
 When does it occur?  
 If we want to change the value of a register and the next step needs this new value which is not available in the register, the data hazard occurs.  
 *Arithmetic/write/load* then *arithmetic/store/condition*  --> Data hazard  
-Examples : *Arithmetic* operation then *store* the result --> Data hazard  
-How to resolve? We should stall during one clock period. The stall unit gets the values of Addr0, Addr1, Addr2, RegWrEn so as to know when to disable the PC and the IF/ID register.  
+__Example__ : *Arithmetic* operation then *store* the result --> Data hazard  
+How to resolve? We should stall during one clock period. The stall unit gets the values of Addr0, Addr1, Addr2, RegWrEn in order to know if we should disable the PC and the IF/ID register.  
 
 __Control hazard__ :  
-When does it occur?  
 When a condition branch is taken the value of the PC is false during two clock periods.  
 How to resolve? We should flush two instructions. The flush unit gets the value of the &-comparator in order to set RegWrEn and MemWrEn to zero when it's needed.  
 It is needed when Branch = 1 (meaning the instruction is a comparaison) and the value of the conparaison = 1 (output of the ALU), in one word when the branch is taken.
