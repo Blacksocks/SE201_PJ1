@@ -128,14 +128,14 @@ The processor would have been faster with the forwarding, winning one clock peri
 
 | 0x100 | load reg5 reg1     | IF | ID | EX | MEM |    |     |     |     |    |     |    |    |     |    |     |     |     |    |     |   |
 |-------|--------------------|----|----|----|-----|----|-----|-----|-----|----|-----|----|----|-----|----|-----|-----|-----|----|-----|---|
-| 0x102 | add_reg2_reg2_reg5 |    | IF | ID | ID  | EX | MEM |     |     |    |     |    |    |     |    |     |     |     |    |     |+1 (stalling)|
+| 0x102 | add_reg2_reg2_reg5 |    | IF | ID | ID  | EX | MEM |     |     |    |     |    |    |     |    |     |     |     |    |     |+1_(stalling)|
 | 0x104 | add_reg1_reg1_reg6 |    |    | IF | IF  | ID | EX  | MEM |     |    |     |    |    |     |    |     |     |     |    |     |   |
 | 0x106 | add_reg3_reg3_reg7 |    |    |    |     | IF | ID  | EX  | MEM |    |     |    |    |     |    |     |     |     |    |     |   |
-| 0x108 | cond_-10_reg3_reg4 |    |    |    |     |    | IF  | ID  | ID  | EX | MEM |    |    |     |    |     |     |     |    |     |+1 (stalling)|
-| 0x10A |                    |    |    |    |     |    |     | IF  | IF  | ID | xx  | xx |    |     |    |     |     |     |    |     |+1 (flushing)|
-| 0x10C |                    |    |    |    |     |    |     |     |     | IF | xx  | xx | xx |     |    |     |     |     |    |     |+1 (flushing)|
+| 0x108 | cond_-10_reg3_reg4 |    |    |    |     |    | IF  | ID  | ID  | EX | MEM |    |    |     |    |     |     |     |    |     |+1_(stalling)|
+| 0x10A |                    |    |    |    |     |    |     | IF  | IF  | ID | xx  | xx |    |     |    |     |     |     |    |     |+1_(flushing)|
+| 0x10C |                    |    |    |    |     |    |     |     |     | IF | xx  | xx | xx |     |    |     |     |     |    |     |+1_(flushing)|
 | 0x100 | load_reg5_reg1     |    |    |    |     |    |     |     |     |    | IF  | ID | EX | MEM |    |     |     |     |    |     |   |
-| 0x102 | add_reg2_reg2_reg5 |    |    |    |     |    |     |     |     |    |     | IF | ID | ID  | EX | MEM |     |     |    |     |+1 (stalling)|
+| 0x102 | add_reg2_reg2_reg5 |    |    |    |     |    |     |     |     |    |     | IF | ID | ID  | EX | MEM |     |     |    |     |+1_(stalling)|
 | 0x104 | add_reg1_reg1_reg6 |    |    |    |     |    |     |     |     |    |     |    | IF | IF  | ID | EX  | MEM |     |    |     |   |
 | 0x106 | add_reg3_reg3_reg7 |    |    |    |     |    |     |     |     |    |     |    |    |     | IF | ID  | EX  | MEM |    |     |   |
-| 0x108 | cond_-10_reg3_reg4 |    |    |    |     |    |     |     |     |    |     |    |    |     |    | IF  | ID  | ID  | EX | MEM |+1 (stalling)|
+| 0x108 | cond_-10_reg3_reg4 |    |    |    |     |    |     |     |     |    |     |    |    |     |    | IF  | ID  | ID  | EX | MEM |+1_(stalling)|
