@@ -15,6 +15,7 @@ b = 00110 (=6)
 ```
 ### 1.4.2
 Nous traitons ici l'overflow sur des nombres codés sur 5 bits.  
+
 __Idée 1__  
 On peut regarder la position du bit de poids fort non nul de chaque nombre  
 (sans prendre en compte le bit de signe).
@@ -57,9 +58,12 @@ Sinon -> pas d'overflow
 Nous n'avons pas pu prouver mathématiquement cette règle mais en raisonnant, celle-ci semble valable.
 
 ### 1.4.3
-a = 00111 (=7)  
-b = 00101 (=5)  
-00101 : last bit of b is equal to 1? Yes  
+Prenons  
+a = 0b00111 = 7  
+b = 0b00101 = 5  
+a * b = 35 = 0b100011  
+35 doit être codé sur 6 bits pour éviter l'overflow.  
+En multipliant a et b, deux nombres codablent sur 5 bits, on à bien de l'overflow.  
 
 # 2 - Processor Design
 ### 2.1.1 - Instruction Set Architecture
