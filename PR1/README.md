@@ -14,7 +14,7 @@ b = 00110 (=6)
 00001 >> 1 = 00000 : Is the last bit of b equal to 1? No. Is b equal to 0? Yes → Finished c = 10000100 (=132)
 ```
 ### 1.4.2
-Nous traitons ici l'overflow sur des nombres codés sur 5 bits.  
+Nous traitons ici l'overflow sur des nombres signés codés sur 5 bits.  
 
 __Idée 1__  
 On peut regarder la position du bit de poids fort non nul de chaque nombre  
