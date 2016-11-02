@@ -41,4 +41,33 @@
 \underline{3.3}\\
     \par
 
+
+		  \\\break
+		  \underline{4.1}\\
+				\par
+				1-bit saturation counting branch predictor : misprediction rate = 19.14%
+				2-bit saturation counting branch predictor : misprediction rate = 18.09%
+
+				Donc le branch predictor sur 2 bits est meilleur que celui sur 1bit. (Mais je ne sais pas comment justifier ...)
+
+			\\\break
+		  \underline{4.2}\\
+				\par
+
+				Selon les branches, on remarque quelques différences entre les branch predictors.
+				Les branche où il y a une différences sont :
+
+					 1-bit saturation counting branch predictor :
+					 bpc: 0x00001104 [4] tgts: [0x0000113c] a:56 t/nt: 10/46 mp/cp: 9/47 mp-ratio: 0,16
+					 bpc: 0x00001158 [88] tgts: [0x000010d4] a:27 t/nt: 21/6 mp/cp: 12/15 mp-ratio: 0,44
+
+					 2-bit saturation counting branch predictor :
+					 bpc: 0x00001104 [4] tgts: [0x0000113c] a:46 t/nt: 10/36 mp/cp: 10/36 mp-ratio: 0,22
+					 bpc: 0x00001158 [88] tgts: [0x000010d4] a:27 t/nt: 21/6 mp/cp: 7/20 mp-ratio: 0,26
+
+				Il n'y a pas de différence sur les autres branches.
+
+				On remarque donc que pour la branche 0x00001104 [4] le branch predictor sur 1 bit est légèrement meilleur, mais sur la branche 0x00001158 [88], le branch predictor sur 2 bit est bien meilleur. 
+
+
 \end{document}
