@@ -69,5 +69,56 @@
 
 				On remarque donc que pour la branche 0x00001104 [4] le branch predictor sur 1 bit est légèrement meilleur, mais sur la branche 0x00001158 [88], le branch predictor sur 2 bit est bien meilleur. 
 
+		  \\\break
+		  \underline{5.1}\\
+				\par
+				Nombre de ligne dans le cache : 4
+				Taille d'un ligne dans le cache : 4
+				Taille totale du cache : 16 octets
+						  Accesses : 488
+						  hits : 364
+						  misses : 124
+						  hit rate : 74,59%
+						  loaded words : 124
+		  \\\break
+		  \underline{5.2}\\
+				\par
+
+				Nombre de ligne dans le cache : 8
+				Taille d'un ligne dans le cache : 4
+				Taille totale du cache : 32 octets
+						  Accesses : 613
+						  hits : 557
+						  misses : 56
+						  hit rate : 90,86%
+
+				Nombre de ligne dans le cache : 16
+				Taille d'un ligne dans le cache : 4
+				Taille totale du cache : 64 octets
+						  Accesses : 688
+						  hits : 673
+						  misses : 15
+						  hit rate : 97,82%
+
+				Nombre de ligne dans le cache : 32
+				Taille d'un ligne dans le cache : 4
+				Taille totale du cache : 128 octets
+						  Accesses : 728
+						  hits : 721
+						  misses : 7
+						  hit rate : 99,04%
+
+				Nombre de ligne dans le cache : 64
+				Taille d'un ligne dans le cache : 4
+				Taille totale du cache : 256 octets
+						  Accesses : 728
+						  hits : 721
+						  misses : 7
+						  hit rate : 99,04%
+
+				La taille du cache est égale à le taille d'une ligne multipliée par le nombre de ligne.
+				Plus le nombre de ligne augmante, donc la taille du cache augmente, plus le hit rate augmente.
+				Les configurations avec 32 lignes et 64 lignes offrent le meilleurs hit rate. Mais on peut dire que la meilleure configuration est celle avec 32 lignes car la taille du cache est plus petite que celle avec 64 lignes.
+
 
 \end{document}
